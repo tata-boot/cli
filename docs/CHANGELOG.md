@@ -41,6 +41,10 @@ All notable changes to `create-fsd-architecture` are documented here.
   inspection helpers. Both tools accept an optional `projectPath` and
   default to the server's working directory; the server exits when stdin
   closes.
+- PR architecture comments (PLAT-09): `.github/workflows/pr-architecture-comments.yml`
+  runs `fsd check` and `fsd doctor` on pull requests and posts the result as
+  one sticky comment, updated on every push. It is reusable from any FSD
+  project via `workflow_call`; see `docs/PR-ARCHITECTURE-COMMENTS.md`.
 
 ### Fixed
 

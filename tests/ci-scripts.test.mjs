@@ -30,3 +30,23 @@ test("CI command capture preserves argument boundaries in paths with spaces", ()
     fs.rmSync(root, { recursive: true, force: true });
   }
 });
+
+test("PR architecture comments workflow runs fsd check and posts one sticky comment", () => {
+  const workflow = fs.readFileSync(
+    path.join(
+      import.meta.dirname,
+      "..",
+      ".github",
+      "workflows",
+      "pr-architecture-comments.yml"
+    ),
+    "utf8"
+  );
+  assert.match(workflow, /workflow_call:/);
+  assert.match(workflow, /pull_request:/);
+  assert.match(workflow, /fsd check/);
+  assert.match(workflow, /fsd doctor/);
+  assert.match(workflow, /<!-- fsd-architecture-check -->/);
+  assert.match(workflow, /pull-requests: write/);
+  assert.match(workflow, /issues\/comments/);
+});
